@@ -87,12 +87,12 @@ const Comfortable = [
     {
       id: 1,
       name: "C++",
-      icon: "C++.svg"
+      icon: "c++.svg"
     },
     {
       id: 2,
       name: "C",
-      icon: "C.svg"
+      icon: "c.svg"
     }
 
   ]
