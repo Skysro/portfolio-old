@@ -32,9 +32,9 @@ const Skills = () => {
               >
                 <Image
                   className={`${
-                    ["Next.js", "Expressjs"].includes(skill.name) &&
-                    "dark:bg-light_2 dark:rounded-full"
-                  }rounded-lg shadow-lg p-1 transition duration-500 hover:scale-125`}
+                    ["Next.js", "Expressjs"].includes(skill.name)
+                    
+                  }rounded-lg shadow-md  p-2 transition duration-500 hover:scale-125`}
                   src={`/images/${skill.icon}`}
                   width={40}
                   height={40}
@@ -62,7 +62,7 @@ const Skills = () => {
                 <Image
                   className={`${skill.name === "C++"} ${
                     skill.name === "C" && "w-10 h-10"
-                  } rounded-lg shadow-md bg-white p-2 transition duration-500 hover:scale-125`}
+                  } rounded-lg shadow-md  p-2 transition duration-500 hover:scale-125`}
                   src={`/images/${skill.icon}`}
                   width={40}
                   height={40}
