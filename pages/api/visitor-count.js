@@ -22,28 +22,31 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Get user public ip
-    // const response = await fetch("https://api.ipify.org");
-    // const ipAddress = await response.json()
+    // Fetch user's public IP address
+    const ipResponse = await axios.get("https://api.ipify.org?format=json");
+    const ipAddress = ipResponse.data.ip;
 
-    // Get ip details
-    // const ipDetailsResponse = await fetch(
-    //   `https://ipinfo.io/${ipAddress}?token=${process.env.IP_INFO_TOKEN}`
-    // );
-    // const ipDetails = await ipDetailsResponse.json();
-    
-    // Let's count visitor
+    // Fetch IP details using ipinfo.io
+    const ipDetailsResponse = await axios.get(`https://ipinfo.io/${ipAddress}/json?token=${process.env.IP_INFO_TOKEN}`);
+    let ipDetails = ipDetailsResponse.data;
+
+    // Stringify IP details after trimming any unexpected whitespace
+    ipDetails = JSON.stringify(ipDetails).trim();
+
+    // Create a new visitor document
     const newVisitor = new Visitors({
-      ipAddress: "unknown",
-      ipDetails: "unknown",
-      userAgent,
-      pageVisited,
+      ipAddress: ipAddress,
+      ipDetails: ipDetails,
+      userAgent: userAgent,
+      pageVisited: pageVisited,
       source: source || "unknown"
     });
-    
+
+    // Save the visitor to MongoDB
     await newVisitor.save();
-    console.log(newVisitor)
-    
+
+    console.log("Visitor saved:", newVisitor);
+
     res.status(201).json({
       success: true,
       message: "Visitor counted",
