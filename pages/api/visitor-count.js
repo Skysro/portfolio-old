@@ -3,6 +3,10 @@ import Visitors from "@/db/VisitorModel";
 import axios from "axios";
 require("@/db/connect");
 
+export const config = {
+  maxDuration: 5,
+};
+
 export default async function handler(req, res) {
   const userAgent = req.headers["user-agent"];
   const { pageVisited, source } = req.query;
